@@ -15,5 +15,36 @@ const db = mysql.createConnection(
       password: 'Webgirl527!',
       database: 'business_db'
     },
-    console.log(`Connected to the books_db database.`)
+    console.log(`Connected to the business_db database.`)
   );
+
+let inquirer = require('inquirer');
+inquirer 
+    .prompt([
+    {
+        type: 'input',
+        message: 'What department are you in?',
+        name: 'name',        
+    },
+    {
+        type: 'input',
+        message: 'What role do you have?',
+        name: 'title',        
+    },
+    {
+        type: 'input',
+        message: 'What is your salary?',
+        name: 'salary',        
+    },
+    {
+        type: 'input',
+        message: 'what is your first name?',
+        name: 'first_name'
+    },
+    {
+        type: 'input',
+        message: 'what is your last name?',
+        name: 'last_name',        
+    },
+       
+    ]);
