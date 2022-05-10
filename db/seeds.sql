@@ -1,8 +1,11 @@
 INSERT INTO department (name)
-VALUES ('Sales'), ('Adversitment'), ('Operations'), ('Human Resources'), ('Accounting');
+VALUE ("Graphic Designer"), ("Front-End Dev"), ("Back-End Dev"), ("UX/UI Dev")
 
-INSERT INTO `role` (title, salary, department_id)
-VALUES ('Manger', 32000, 2), ('Employee', 28000, 1), ('Intern', 5000, 5), ('Manager', 38000, 4), ('Employee', 30000, 5);
+INSERT INTO `role` (role_title, role_salary, dept_id)
+VALUES ('Manager', 32000, 1), ('Associate', 28000, 1), ('Associate', 28000, 1),
+ ('Manager', 32000, 2), ('Associate', 28000, 2), ('Associate', 28000, 2),;
+ ('Manager', 32000, 2), ('Associate', 28000, 2), ('Associate', 28000, 2),;
+ ('Manager', 32000, 2), ('Associate', 28000, 2), ('Associate', 28000, 2),;
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (employee_first, employee_last, role_id, mgr_id)
 VALUES ('Kathy', 'Smith', 1, null), ('Jim', 'Speghetti', )

@@ -45,9 +45,11 @@ modeule.exports = {
 ],
 addingDepartment: 
     {
-        type: "input",
+        type: "list",
         message: "Please input the name of the Department being added",
-        name: "dept_name"
+        name: "dept_name",
+        choices: ["Graphic Designer", "Front-End Dev", "Back-End Dev", "UX/UI Dev"]
+
     },
 addingRole: [
     {
@@ -63,23 +65,25 @@ addingRole: [
     {
         type: "input",
         message: "Please provide the Department ID for this Role",
-        name: "role_dept_id"
+        name: "dept_id"
     }
 ],
 removingRole: {
     type: "list",
     message: "Which role would you like to remove?",
     name: "remove_role",
-    choices: ["Graphic Designer", "Front-End Dev", "Back-End Dev", "UX/UI Dev", "Manager", "Associate"]
+    choices: ["Manager", "Associate"]
 },
 removingEmployee: {
     type: "list",
     message: "What was your Employee's role you are wanting to remove?",
     name: "remove_employee",
-    choices: ["Graphic Designer", "Front-End Dev", "Back-End Dev", "UX/UI Dev", "Manager", "Associate"]
-},
+    choices: ["employee_first", "employee_last", "role_id", "mgr_id"] 
+}, // does this need a templet literal???? 
 toExit: {
     type: "list",
-    message: "Please confirm you are a exiting TRAKS for Employees"
+    message: "Please confirm you are a exiting TRAKS for Employees",
+    name: "exiting",
+    choices: ["Yes, exit", "No, do not exit"]
 }
 }
