@@ -25,36 +25,7 @@ begin();
 
 async function begin() {
     const userPicks = await inquirer.prompt(questions.firstQ);
-    switch (userPicks.questionStart) {
-        case "Add Employee": addingEmployee();
-            break;
-        case "Remove Employee": removingEmployee();
-            break;
-        case "Update Employee": updateEmployee(); //needs async function
-            break;
-        case "Add Department": addingDepartment();
-            break;
-        case "View All Employees by Manager": viewallEbyMgmt(); //needs async func
-            break;
-        case "View All Employees by Department": viewallEbyDept(); //needs asyn func
-            break;
-        case "Add Role": addingRole();
-            break;
-        case "Remove Role": removingRole();
-            break;
-        case "View All Roles": showAllRoles(); //needs async func
-            break;
-        case "Update an Employee's Role": updateEmployeeRole(); // needs async func
-            break;
-        case "Update an Employees Manager": updateEmployeeMngr(); // meeds async func
-            break;
-        case "View All Departments": viewAllDepts(); //needs async func
-            break;
-        case "Exit": connection.end();
-            break;
-        default:
-            connection.end();
-    }
+    
 }
 
 async function addingEmployee() {
