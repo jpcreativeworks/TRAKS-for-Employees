@@ -1,5 +1,5 @@
 let inquirer = require('inquirer');
-
+require("console.table")
 const mysql = require('mysql2');
 const { firstQ } = require('./utils/questions')
 //required ports and method to call expredss
@@ -30,7 +30,7 @@ function begin() {
                 break;
             case "Add Department": addingDepartment();
                 break;
-            case "View All Employees by Manager": viewallEbyMgmt(); //needs async func
+            case "View All Employees by Manager": viewAllbyMgmt(); //needs async func
                 break;
             case "View All Employees by Department": viewallEbyDept(); //needs asyn func
                 break;
@@ -50,6 +50,15 @@ function begin() {
                 db.end();
             process.exit(0)
         }
+    })
+}
+
+function viewAllbyMgmt() {
+    db.query('SELECT CONCAT(e.employee_first,",", e.employee_last ) AS "Employee Name", r.role_title, r.role_salary,d.name,ee.employee_first AS "Manager First name",ee.employee_last AS "Manager LAst name" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id left join employee ee on e.mgr_id =ee.id;',
+    function(err,data){
+        if(err) throw err;
+        console.table(data);
+        begin()
     })
 }
 // inquirer 
