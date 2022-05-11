@@ -34,7 +34,7 @@ module.exports = {
         type: "list",
         message: "Please submit valid role ID",
         name: "role_id",
-        choices: "roleTypes"
+        choices: ["Manager", "Associate"]
     },
     {
         type: "list",

@@ -30,15 +30,15 @@ function begin() {
                 break;
             case "Add Department": addingDepartment();
                 break;
-            case "View All Employees by Manager": viewAllbyMgmt(); //needs async func
+            case "View All Employees by Manager": viewAllbyMgmt(); //needs async func completed
                 break;
-            case "View All Employees by Department": viewallEbyDept(); //needs asyn func
+            case "View All Employees by Department": viewAllbyDept(); //needs asyn func completed
                 break;
             case "Add Role": addingRole();
                 break;
             case "Remove Role": removingRole();
                 break;
-            case "View All Roles": showAllRoles(); //needs async func
+            case "View All Roles": showAllRoles(); //needs async func in process
                 break;
             case "Update an Employee's Role": updateEmployeeRole(); // needs async func
                 break;
@@ -54,9 +54,36 @@ function begin() {
 }
 
 function viewAllbyMgmt() {
-    db.query('SELECT CONCAT(e.employee_first,",", e.employee_last ) AS "Employee Name", r.role_title, r.role_salary,d.name,ee.employee_first AS "Manager First name",ee.employee_last AS "Manager LAst name" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id left join employee ee on e.mgr_id =ee.id;',
+    db.query('SELECT CONCAT(e.employee_first,",", e.employee_last ) AS "Employee Name", r.role_title, r.role_salary,d.name,ee.employee_first AS "Manager First name",ee.employee_last AS "Manager Last name" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id left join employee ee on e.mgr_id =ee.id;',
     function(err,data){
         if(err) throw err;
+        console.table(data);
+        begin()
+    })
+}
+
+function viewAllbyDept() {
+    db.query('SELECT CONCAT(e.employee_first,",", e.employee_last ) AS "Employee Name", d.id, d.name AS "Department" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id left join employee ee on e.mgr_id =ee.id;',
+    function(err,data){
+        if (err) throw err;
+        console.table(data);
+        begin()
+    })
+}
+
+function showAllRoles() {
+    db.query('SELECT r.role_title AS "Employee Role" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id;',
+    function(err,data){
+        if (err) throw err;
+        console.table(data);
+        begin()
+    })
+}
+
+function viewAllDepts () {
+    db.query('SELECT * from dept;',
+    function(err,data) {
+        if (err) throw err;
         console.table(data);
         begin()
     })
