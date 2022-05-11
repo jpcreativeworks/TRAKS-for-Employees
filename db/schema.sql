@@ -3,31 +3,31 @@ CREATE DATABASE business_db;
 
 USE business_db;
 
-CREATE TABLE department (
+CREATE TABLE dept (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE `role` (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(30) NOT NULL,
-  salary INT,
-  department_id INT,
-  FOREIGN KEY (department_id)
-  REFERENCES department(id)
+  role_title VARCHAR(30) NOT NULL,
+  role_salary INT,
+  dept_id INT,
+  FOREIGN KEY (dept_id)
+  REFERENCES dept(id)
   ON DELETE SET NULL
 );
 
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  first_name VARCHAR(30) NOT NULL,
-  last_name VARCHAR(30) NOT NULL,
+  employee_first VARCHAR(30) NOT NULL,
+  employee_last VARCHAR(30) NOT NULL,
   role_id INT,
-  manager_id INT,
+  mgr_id INT,
   FOREIGN KEY (role_id)
   REFERENCES `role`(id)
   ON DELETE SET NULL,
-  FOREIGN KEY (manager_id)
+  FOREIGN KEY (mgr_id)
   REFERENCES employee(id)
 );
 

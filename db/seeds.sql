@@ -1,4 +1,4 @@
-INSERT INTO department (name)
+INSERT INTO dept (name)
 VALUE ("Graphic Designer"), ("Front-End Dev"), ("Back-End Dev"), ("UX/UI Dev")
 
 INSERT INTO `role` (role_title, role_salary, dept_id)

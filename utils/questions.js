@@ -1,5 +1,5 @@
-modeule.exports = {
-    firstQ: {
+module.exports = {
+    firstQ: [{
         type: "list",
         message: "Please choose what you would like to do by using your arrow and enter keys:",
         name: "questionStart",
@@ -19,8 +19,8 @@ modeule.exports = {
             "Exit"       
                     
         ]
-    },
-    addingEmployee: (roleTypes, employees) => [{
+    }],
+    addingEmployee: [{
         type: "input",
         message: "Employee's first name?",
         name: "employee_first"
@@ -34,13 +34,13 @@ modeule.exports = {
         type: "list",
         message: "Please submit valid role ID",
         name: "role_id",
-        choices: roleTypes
+        choices: "roleTypes"
     },
     {
         type: "list",
         message: "Choose the Employee's Manager",
         name: "mgr_id",
-        choices: employees
+        choices: "employees"
     }
 ],
 addingDepartment: 
@@ -79,7 +79,7 @@ removingEmployee: {
     message: "What was your Employee's role you are wanting to remove?",
     name: "remove_employee",
     choices: ["employee_first", "employee_last", "role_id", "mgr_id"] 
-}, // does this need a templet literal???? 
+}, 
 toExit: {
     type: "list",
     message: "Please confirm you are a exiting TRAKS for Employees",
