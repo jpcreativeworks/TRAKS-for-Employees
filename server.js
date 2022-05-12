@@ -1,8 +1,8 @@
 let inquirer = require('inquirer');
 require("console.table")
 const mysql = require('mysql2');
-const { firstQ, addsEmployee, addsRole, addsDepartment } = require('./utils/questions')
-//required ports and method to call expredss
+const { firstQ, addsEmployee, addsRole, addsDepartment, } = require('./utils/questions')
+//required ports and method to call express
 
 const db = mysql.createConnection(
     {
@@ -24,11 +24,11 @@ function begin() {
         switch (res.questionStart) {
             case "Add Employee": addingEmployee(); //completed
                 break;
-            case "Remove Employee": removingEmployee();
-                break;
+            // case "Remove Employee": removingEmployee(); //completed
+            //     break;
             case "Update Employee": updateEmployee(); //needs async function
                 break;
-            case "Add Department": addingDepartment(); //in process
+            case "Add Department": addingDepartment(); //complete debug
                 break;
             case "View All Employees by Manager": viewAllbyMgmt(); //needs async func completed
                 break;
@@ -106,24 +106,11 @@ function addingEmployee (res) {
     
 }
 //debug
-function addingRole (res) {
-    inquirer.prompt(addsRole).then(function(res) {
-        console.log(res);
-        let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
-        db.query('INSERT INTO roles(role_title, role_salary, dept_id) VALUES ("' + res.role_title + '","' + res.role_salary + '","' + parseInt(res.dept_id) + '")',
-        function(err,data) {
-            if (err) throw err;
-            console.table(data);
-            begin();
-        })
-    });
-}
-// ADDING DEPT NOT WORKING
-// function addingDepartment (res) {
-//     inquirer.prompt(addsDepartment).then(function(res) {
+// function addingRole (res) {
+//     inquirer.prompt(addsRole).then(function(res) {
 //         console.log(res);
-//         // let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
-//         db.query('INSERT INTO dept(name) VALUE ("' + res.dept_id + '","' + parseInt(res.dept_id) +'")',
+//         let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
+//         db.query('INSERT INTO roles(role_title, role_salary, dept_id) VALUES ("' + res.role_title + '","' + res.role_salary + '","' + parseInt(res.dept_id) + '")',
 //         function(err,data) {
 //             if (err) throw err;
 //             console.table(data);
@@ -131,7 +118,34 @@ function addingRole (res) {
 //         })
 //     });
 // }
+// ADDING DEPT NOT WORKING
+function addingDepartment (res) {
+    inquirer.prompt(addsDepartment).then(function(res) {
+        console.log(res);
+        const newDept = res
+        // let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
+        db.query(`INSERT INTO dept(name) VALUE ('${newDept.name}')`);
+        // function(err,data) {
+        //     if (err) throw err;
+            // console.table(data);
+            begin();
+        // }
+    });
+}
+//BONUS
+// function removingEmployee(){
+//     console.log("Employee Removed");
+//     inquirer.prompt(removesEmployee).then(function(res) {
+//         console.log(res)
+//         let deleteUserChoiceEmployee = res.map(({id, employee_first, employee_last}) =>
+//         ({value: id, name: `${id} ${employee_first} ${employee_last}`}));
+//         db.query(DELETE FROM employee WHERE ());
+//         console.table(res);
+//         deletePromots(deleteUserChoiceEmployee);
 
+//     });
+
+// }
 
 // inquirer 
 //     .prompt([

@@ -5,7 +5,7 @@ module.exports = {
         name: "questionStart",
         choices: [
             "Add Employee",
-            "Remove Employee",
+            // "Remove Employee",
             "Update Employee",                         
             "Add Department",            
             "View All Employees by Manager",
@@ -78,12 +78,12 @@ removingRole: {
     name: "remove_role",
     choices: ["Manager", "Associate"]
 },
-removingEmployee: {
-    type: "list",
-    message: "What was your Employee's role you are wanting to remove?",
-    name: "remove_employee",
-    choices: ["employee_first", "employee_last", "role_id", "mgr_id"] 
-}, 
+// removesEmployee: {
+//     type: "list",
+//     message: "What was your Employee's name you are wanting to remove?",
+//     name: "remove_employee",
+//     choices: deleteUserChoiceEmployee 
+// }, 
 toExit: {
     type: "list",
     message: "Please confirm you are a exiting TRAKS for Employees",

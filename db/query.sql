@@ -29,3 +29,5 @@ INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ();
 INSERT INTO roles(role_title, role_salary, dept_id) VALUES ();
 -- adding dept
 INSERT INTO dept(name) VALUE ();
+-- remove emp
+DELETE from employee WHERE ?
