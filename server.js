@@ -1,7 +1,7 @@
 let inquirer = require('inquirer');
 require("console.table")
 const mysql = require('mysql2');
-const { firstQ } = require('./utils/questions')
+const { firstQ, addsEmployee, addsRole, addsDepartment } = require('./utils/questions')
 //required ports and method to call expredss
 
 const db = mysql.createConnection(
@@ -22,29 +22,29 @@ db.connect(function(err){
 function begin() {
     inquirer.prompt(firstQ).then(function(res) {
         switch (res.questionStart) {
-            case "Add Employee": addingEmployee();
+            case "Add Employee": addingEmployee(); //completed
                 break;
             case "Remove Employee": removingEmployee();
                 break;
             case "Update Employee": updateEmployee(); //needs async function
                 break;
-            case "Add Department": addingDepartment();
+            case "Add Department": addingDepartment(); //in process
                 break;
             case "View All Employees by Manager": viewAllbyMgmt(); //needs async func completed
                 break;
             case "View All Employees by Department": viewAllbyDept(); //needs asyn func completed
                 break;
-            case "Add Role": addingRole();
+            case "Add Role": addingRole(); //completed debug
                 break;
             case "Remove Role": removingRole();
                 break;
-            case "View All Roles": showAllRoles(); //needs async func in process
+            case "View All Roles": showAllRoles(); //needs async func completed
                 break;
             case "Update an Employee's Role": updateEmployeeRole(); // needs async func
                 break;
             case "Update an Employees Manager": updateEmployeeMngr(); // meeds async func
                 break;
-            case "View All Departments": viewAllDepts(); //needs async func
+            case "View All Departments": viewAllDepts(); //needs async func completed
                 break;
             default:
                 db.end();
@@ -88,6 +88,51 @@ function viewAllDepts () {
         begin()
     })
 }
+
+function addingEmployee (res) {
+    console.log('find the response?', res);
+    inquirer.prompt(addsEmployee).then(function(res) {
+        console.log(res);
+        let roles = {Manager: 1, Associate: 2};
+        db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ("' + res.employee_first + '","' + res.employee_last + '","' + roles[res.role_title] + '","' + parseInt(res.mgr_id) + '")',
+        function(err,data) {
+            if (err) throw err;
+            console.table(data);
+            begin();
+        })
+    });
+    // addingEmployee
+    // db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ()')
+    
+}
+//debug
+function addingRole (res) {
+    inquirer.prompt(addsRole).then(function(res) {
+        console.log(res);
+        let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
+        db.query('INSERT INTO roles(role_title, role_salary, dept_id) VALUES ("' + res.role_title + '","' + res.role_salary + '","' + parseInt(res.dept_id) + '")',
+        function(err,data) {
+            if (err) throw err;
+            console.table(data);
+            begin();
+        })
+    });
+}
+// ADDING DEPT NOT WORKING
+// function addingDepartment (res) {
+//     inquirer.prompt(addsDepartment).then(function(res) {
+//         console.log(res);
+//         // let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
+//         db.query('INSERT INTO dept(name) VALUE ("' + res.dept_id + '","' + parseInt(res.dept_id) +'")',
+//         function(err,data) {
+//             if (err) throw err;
+//             console.table(data);
+//             begin();
+//         })
+//     });
+// }
+
+
 // inquirer 
 //     .prompt([
 //     {

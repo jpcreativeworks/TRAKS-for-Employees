@@ -23,4 +23,9 @@ from employee e
 left join roles r on r.id = e.role_id
 --view all depts
     SELECT * from dept;
-    
+-- adding an Employee
+INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES (); 
+-- adding role
+INSERT INTO roles(role_title, role_salary, dept_id) VALUES ();
+-- adding dept
+INSERT INTO dept(name) VALUE ();

@@ -20,7 +20,7 @@ module.exports = {
                     
         ]
     }],
-    addingEmployee: [{
+    addsEmployee: [{
         type: "input",
         message: "Employee's first name?",
         name: "employee_first"
@@ -33,25 +33,29 @@ module.exports = {
     {
         type: "list",
         message: "Please submit valid role ID",
-        name: "role_id",
+        name: "role_title",
         choices: ["Manager", "Associate"]
     },
     {
         type: "list",
-        message: "Choose the Employee's Manager",
-        name: "mgr_id",
-        choices: "employees"
-    }
-],
-addingDepartment: 
-    {
-        type: "list",
-        message: "Please input the name of the Department being added",
+        message: "Choose the Employee's department",
         name: "dept_name",
         choices: ["Graphic Designer", "Front-End Dev", "Back-End Dev", "UX/UI Dev"]
+    },
+    {
+        type: "input",
+        message: "Enter New Employee's Manager by the Manager ID",
+        name: "mgr_id"
+    }
+],
+addsDepartment: 
+    {
+        type: "input",
+        message: "Please input the name of the Department being added",
+        name: "name",
 
     },
-addingRole: [
+addsRole: [
     {
         type: "input",
         message: "Please provide the Title of the Role being added",
