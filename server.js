@@ -1,7 +1,7 @@
 let inquirer = require('inquirer');
 require("console.table")
 const mysql = require('mysql2');
-const { firstQ, addsEmployee, addsRole, addsDepartment, } = require('./utils/questions')
+const { firstQ, addsEmployee, addsRole, addsDepartment } = require('./utils/questions')
 //required ports and method to call express
 
 const db = mysql.createConnection(
@@ -36,8 +36,8 @@ function begin() {
                 break;
             case "Add Role": addingRole(); //completed debug
                 break;
-            case "Remove Role": removingRole();
-                break;
+            // case "Remove Role": removingRole();
+            //     break;
             case "View All Roles": showAllRoles(); //needs async func completed
                 break;
             case "Update an Employee's Role": updateEmployeeRole(); // needs async func
@@ -94,7 +94,7 @@ function addingEmployee (res) {
     inquirer.prompt(addsEmployee).then(function(res) {
         console.log(res);
         let roles = {Manager: 1, Associate: 2};
-        db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ("' + res.employee_first + '","' + res.employee_last + '","' + roles[res.role_title] + '","' + parseInt(res.mgr_id) + '")',
+        db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ("' + res.employee_first + '","' + res.employee_last + '","' + res.role_title + '","' + parseInt(res.mgr_id) + '")',
         function(err,data) {
             if (err) throw err;
             console.table(data);
@@ -118,7 +118,7 @@ function addingEmployee (res) {
 //         })
 //     });
 // }
-// ADDING DEPT NOT WORKING
+// ADDING DEPT 
 function addingDepartment (res) {
     inquirer.prompt(addsDepartment).then(function(res) {
         console.log(res);
@@ -132,6 +132,17 @@ function addingDepartment (res) {
         // }
     });
 }
+function updateEmployee (res) {
+    inquirer.prompt(res).then(function(res) {
+        console.log(res);
+        const employeeId = res.map(({ id, employee_first, employee_last}) =>
+        ({value: id, first_name: `${employee_first}`, last_name: `${employee_last}`}));
+        console.table(res);
+        console.log(employeeId + " ready to update.")
+
+    })
+}
+
 //BONUS
 // function removingEmployee(){
 //     console.log("Employee Removed");
@@ -146,6 +157,8 @@ function addingDepartment (res) {
 //     });
 
 // }
+
+
 
 // inquirer 
 //     .prompt([

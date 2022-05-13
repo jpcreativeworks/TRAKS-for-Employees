@@ -11,7 +11,7 @@ module.exports = {
             "View All Employees by Manager",
             "View All Employees by Department",
             "Add Role",
-            "Remove Role",
+            // "Remove Role",
             "View All Roles",
             "Update an Employee's Role",
             "Update an Employees Manager",
@@ -34,18 +34,60 @@ module.exports = {
         type: "list",
         message: "Please submit valid role ID",
         name: "role_title",
-        choices: ["Manager", "Associate"]
+        choices: [
+            {
+                name:"Graphic Designer/Manager",
+                value:1,
+
+            },
+            {
+                name:"Graphic Designer/Associate",
+                value:2,
+            },
+            {
+                name:"Graphic Designer/Intern",
+                value:13,
+            },
+            {
+                name:"Front-End Dev/Manager",
+                value:4,
+            },
+            {
+                name:"Front-End Dev/Associate",
+                value:5,
+            },
+            {
+                name:"Back-End Dev/Manager",
+                value:7,
+            },
+            {
+                name:"Back-End Dev/Associate",
+                value:8,
+            },
+            {
+                name:"UX/UI Dev/Manager",
+                value:10,
+            },
+            {
+                name:"UX/UI Dev/Associate",
+                value:11,
+            },
+        ]
     },
+  
     {
         type: "list",
-        message: "Choose the Employee's department",
-        name: "dept_name",
-        choices: ["Graphic Designer", "Front-End Dev", "Back-End Dev", "UX/UI Dev"]
-    },
-    {
-        type: "input",
         message: "Enter New Employee's Manager by the Manager ID",
-        name: "mgr_id"
+        name: "mgr_id",
+        choices:[{
+            name:"Bonnie, Bean",
+            value:1,
+        },
+        {
+            name:"Kathy, Smith",
+            value:1,
+        },
+    ]
     }
 ],
 addsDepartment: 
@@ -72,12 +114,32 @@ addsRole: [
         name: "dept_id"
     }
 ],
-removingRole: {
-    type: "list",
-    message: "Which role would you like to remove?",
-    name: "remove_role",
-    choices: ["Manager", "Associate"]
-},
+// updatesEmployee: [
+//     {
+//         type: "input",
+//         message: "Type the numeric ID for Employee needing update",
+//         name: "employee_id"
+//     },
+//     {
+//         type: "choices",
+//         message: "What would you like to change?",
+//         // choices: [employee.id, employee.employee_first, employee.employee_last, e.role_id, e.mgr_id],
+//         // choices: ["employee.id", "employee.employee_first", "employee.employee_last", "e.role_id", "e.mgr_id"],
+//         choices: [`${employee.id}`, `${employee.employee_first}`, `${employee.employee_last}`, `${e.role_id}`, `${e.mgr_id}`],
+//         name: "employee_update_choice"
+//     },
+//     {
+//         type: "input",
+//         message: "Please input new update for Employee",
+//         name: "new_employee_update"
+//     }
+// ],
+// removingRole: {
+//     type: "list",
+//     message: "Which role would you like to remove?",
+//     name: "remove_role",
+//     choices: ["Manager", "Associate"]
+// },
 // removesEmployee: {
 //     type: "list",
 //     message: "What was your Employee's name you are wanting to remove?",
