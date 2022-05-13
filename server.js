@@ -1,7 +1,7 @@
 let inquirer = require('inquirer');
 require("console.table")
 const mysql = require('mysql2');
-const { firstQ, addsEmployee, addsRole, addsDepartment } = require('./utils/questions')
+const { firstQ, addsEmployee, addsRole, addsDepartment, updatesEmployee } = require('./utils/questions')
 //required ports and method to call express
 
 const db = mysql.createConnection(
@@ -26,7 +26,7 @@ function begin() {
                 break;
             // case "Remove Employee": removingEmployee(); //completed
             //     break;
-            case "Update Employee": updateEmployee(); //needs async function
+            case "Update Employee by Role": updateEmployee(); //needs async function
                 break;
             case "Add Department": addingDepartment(); //complete debug
                 break;
@@ -54,6 +54,7 @@ function begin() {
 }
 
 function viewAllbyMgmt() {
+    console.log('viewAllByMgmt')
     db.query('SELECT CONCAT(e.employee_first,",", e.employee_last ) AS "Employee Name", r.role_title, r.role_salary,d.name,ee.employee_first AS "Manager First name",ee.employee_last AS "Manager Last name" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id left join employee ee on e.mgr_id =ee.id;',
     function(err,data){
         if(err) throw err;
@@ -93,7 +94,7 @@ function addingEmployee (res) {
     console.log('find the response?', res);
     inquirer.prompt(addsEmployee).then(function(res) {
         console.log(res);
-        let roles = {Manager: 1, Associate: 2};
+        let roles = {Manager: null, Associate: 1};
         db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ("' + res.employee_first + '","' + res.employee_last + '","' + res.role_title + '","' + parseInt(res.mgr_id) + '")',
         function(err,data) {
             if (err) throw err;
@@ -133,13 +134,16 @@ function addingDepartment (res) {
     });
 }
 function updateEmployee (res) {
-    inquirer.prompt(res).then(function(res) {
-        console.log(res);
-        const employeeId = res.map(({ id, employee_first, employee_last}) =>
-        ({value: id, first_name: `${employee_first}`, last_name: `${employee_last}`}));
-        console.table(res);
-        console.log(employeeId + " ready to update.")
-
+    console.log('in updateEmployee');
+    inquirer.prompt(updatesEmployee).then(function(res) {
+        console.log("res", res);
+        db.query(`update employee set role_id=${res.role_id}, mgr_id=NULL where id=${res.id};`,
+        function(err,data){
+            console.table(res);
+            console.log("data", data);        
+            begin();
+        });
+       
     })
 }
 

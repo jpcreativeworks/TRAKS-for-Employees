@@ -5,7 +5,7 @@ USE business_db;
 
 CREATE TABLE dept (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30) NOT NULL
+  name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE roles(
