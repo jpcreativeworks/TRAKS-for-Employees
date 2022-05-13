@@ -1,9 +1,25 @@
 let inquirer = require('inquirer');
 require("console.table")
 const mysql = require('mysql2');
+const logo = require('asciiart-logo');
+// const config = require('./package.json');
+// console.log(logo(config).render());
 const { firstQ, addsEmployee, addsRole, addsDepartment, updatesEmployee } = require('./utils/questions')
 //required ports and method to call express
+function logoHere() {
+    console.log(
+        logo({
+            name: 'Welcome to TRAKS: An Employee Managment System',
+            lineChars: 17,
+            padding: 3,
+            margin: 2,
+            boarderColor: 'bold-green',
+            logoColor: 'yellow',
+            textColor: 'white',
+        }).render());
+}
 
+logoHere();
 const db = mysql.createConnection(
     {
       host: 'localhost',
@@ -16,12 +32,12 @@ const db = mysql.createConnection(
   );
 db.connect(function(err){
     if(err) throw err;
-    console.log("Welcome to Jenn's Employee tracker")
+    console.log("Please use your arrow keys to enter a request:")
     begin();    
 })
 function begin() {
     inquirer.prompt(firstQ).then(function(res) {
-        switch (res.questionStart) {
+        switch (res.questionStart) { //7
             case "Add Employee": addingEmployee(); //completed
                 break;
             // case "Remove Employee": removingEmployee(); //completed
@@ -38,12 +54,12 @@ function begin() {
                 break;
             // case "Remove Role": removingRole();
             //     break;
-            case "View All Roles": showAllRoles(); //needs async func completed
+            case "View All Roles": viewAllRoles(); //needs async func completed
                 break;
-            case "Update an Employee's Role": updateEmployeeRole(); // needs async func
-                break;
-            case "Update an Employees Manager": updateEmployeeMngr(); // meeds async func
-                break;
+            // case "Update an Employee's Role": updateEmployeeRole(); // needs async func
+            //     break;
+            // case "Update an Employees Manager": updateEmployeeMngr(); // meeds async func
+            //     break;
             case "View All Departments": viewAllDepts(); //needs async func completed
                 break;
             default:
@@ -72,7 +88,7 @@ function viewAllbyDept() {
     })
 }
 
-function showAllRoles() {
+function viewAllRoles() {
     db.query('SELECT r.role_title AS "Employee Role" from employee e left join roles r on r.id = e.role_id left join dept d on d.id = r.dept_id;',
     function(err,data){
         if (err) throw err;
@@ -107,18 +123,19 @@ function addingEmployee (res) {
     
 }
 //debug
-// function addingRole (res) {
-//     inquirer.prompt(addsRole).then(function(res) {
-//         console.log(res);
-//         let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
-//         db.query('INSERT INTO roles(role_title, role_salary, dept_id) VALUES ("' + res.role_title + '","' + res.role_salary + '","' + parseInt(res.dept_id) + '")',
-//         function(err,data) {
-//             if (err) throw err;
-//             console.table(data);
-//             begin();
-//         })
-//     });
-// }
+function addingRole (res) {
+    inquirer.prompt(addsRole).then(function(res) {
+        console.log(res);
+        const newRole = res
+        // let dept = {'Graphic Design': 1, 'Front-End Dev': 2, 'Back-End Dev': 3, 'UX/UI Dev': 4};
+        db.query(`INSERT INTO roles(role_title, role_salary, dept_id) VALUES ('${newRole.role_title}', ${newRole.role_salary}, ${newRole.dept_id})`),
+        // function(err,data) {
+        //     if (err) throw err;
+        //     console.table(data);
+            begin();
+        // })
+    });
+}
 // ADDING DEPT 
 function addingDepartment (res) {
     inquirer.prompt(addsDepartment).then(function(res) {
