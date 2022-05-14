@@ -50,7 +50,7 @@ function begin() {
                 break;
             case "View All Employees by Department": viewAllbyDept(); //needs asyn func completed
                 break;
-            case "Add Role": addingRole(); //completed debug
+            case "Add Role": addingRole(); //completed 
                 break;
             // case "Remove Role": removingRole();
             //     break;
@@ -106,12 +106,19 @@ function viewAllDepts () {
     })
 }
 
-function addingEmployee (res) {
-    console.log('find the response?', res);
+function addingEmployee (res) { 
+    console.log('Lets add a New Employee', res);
     inquirer.prompt(addsEmployee).then(function(res) {
         console.log(res);
-        let roles = {Manager: null, Associate: 1};
-        db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ("' + res.employee_first + '","' + res.employee_last + '","' + res.role_title + '","' + parseInt(res.mgr_id) + '")',
+        const newEmployee = res;
+        let roles = {Manager: null, Associate: 1, Intern: 2};
+        // db.query(`'INSERT INTO employee(employee_first, employee_last, role_title, mgr_id) VALUES ('${newEmployee.employee_first}',${newEmployee.employee_last}, '${newEmployee.role_title}', ${newEmployee.mgr_id})`),
+        db.query(`INSERT INTO employee SET ?`, {
+            employee_first: res.employee_first,
+            employee_last: res.employee_last,
+            role_id: res.role_id,
+            mgr_id: res.mrg_id
+        },
         function(err,data) {
             if (err) throw err;
             console.table(data);
@@ -122,7 +129,7 @@ function addingEmployee (res) {
     // db.query('INSERT INTO employee(employee_first, employee_last, role_id, mgr_id) VALUES ()')
     
 }
-//debug
+// ADDING ROLE
 function addingRole (res) {
     inquirer.prompt(addsRole).then(function(res) {
         console.log(res);

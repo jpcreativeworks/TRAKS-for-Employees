@@ -33,7 +33,7 @@ module.exports = {
     {
         type: "list",
         message: "Please submit valid role ID",
-        name: "role_title",
+        name: "role_id",
         choices: [
             {
                 name: "Graphic Designer/Manager",
@@ -46,7 +46,7 @@ module.exports = {
             },
             {
                 name: "Graphic Designer/Intern",
-                value: 13,
+                value: 3,
             },
             {
                 name: "Front-End Dev/Manager",
@@ -58,19 +58,19 @@ module.exports = {
             },
             {
                 name: "Back-End Dev/Manager",
-                value: 7,
+                value: 6,
             },
             {
                 name: "Back-End Dev/Associate",
-                value: 8,
+                value: 7,
             },
             {
                 name: "UX/UI Dev/Manager",
-                value: 10,
+                value: 8,
             },
             {
                 name: "UX/UI Dev/Associate",
-                value: 11,
+                value: 9,
             }
         ]
     },
@@ -81,11 +81,11 @@ module.exports = {
         name: "mgr_id",
         choices: [{
             name: "Bonnie, Bean",
-            value: null,
+            value: 2,
         },
         {
             name: "Kathy, Smith",
-            value: null,
+            value: 1,
         },
         {
             name: "Manager Status",
