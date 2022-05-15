@@ -4,14 +4,12 @@ module.exports = {
         message: "Please choose what you would like to do by using your arrow and enter keys:",
         name: "questionStart",
         choices: [
-            "Add Employee",
-            // "Remove Employee",
+            "Add Employee",            
             "Update Employee by Role",
             "Add Department",
             "View All Employees by Manager",
             "View All Employees by Department",
             "Add Role",
-            // "Remove Role",
             "View All Roles",
             "Update an Employee's Role",
             "Update an Employees Manager",
@@ -205,33 +203,6 @@ module.exports = {
                 }
             ]
 
-    },
-        // {
-        //     type: "choices",
-        //     message: "What would you like to change?",
-        //     // choices: [employee.id, employee.employee_first, employee.employee_last, e.role_id, e.mgr_id],
-        //     // choices: ["employee.id", "employee.employee_first", "employee.employee_last", "e.role_id", "e.mgr_id"],
-        //     choices: [`${employee.id}`, `${employee.employee_first}`, `${employee.employee_last}`, `${e.role_id}`, `${e.mgr_id}`],
-        //     name: "employee_update_choice"
-        // },
-        
-    ],
-    // removingRole: {
-    //     type: "list",
-    //     message: "Which role would you like to remove?",
-    //     name: "remove_role",
-    //     choices: ["Manager", "Associate"]
-    // },
-    // removesEmployee: {
-    //     type: "list",
-    //     message: "What was your Employee's name you are wanting to remove?",
-    //     name: "remove_employee",
-    //     choices: deleteUserChoiceEmployee 
-    // }, 
-    // toExit: {
-    //     type: "list",
-    //     message: "Please confirm you are a exiting TRAKS for Employees",
-    //     name: "exiting",
-    //     choices: ["Yes, exit", "No, do not exit"]
-    // }
+    }
+    ]
 }
