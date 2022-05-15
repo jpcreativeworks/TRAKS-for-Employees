@@ -9,11 +9,11 @@ const { firstQ, addsEmployee, addsRole, addsDepartment, updatesEmployee } = requ
 function logoHere() {
     console.log(
         logo({
-            name: 'Welcome to TRAKS: An Employee Managment System',
+            name: 'Welcome to TRAKS: The Employee Managment System',
             lineChars: 17,
             padding: 3,
             margin: 2,
-            boarderColor: 'bold-green',
+            boarderColor: 'green',
             logoColor: 'yellow',
             textColor: 'white',
         }).render());
@@ -24,8 +24,8 @@ const db = mysql.createConnection(
     {
       host: 'localhost',
       user: 'root',
-      //have to instert password
-      password: 'Webgirl527!',
+      //have to insert password
+      password: '<password>',
       database: 'business_db'
     },
     console.log(`Connected to the business_db database.`)
